@@ -61,7 +61,7 @@ public class RGBLedsBTBE : MonoBehaviour {
       }
 
       string[] LEDChosenColours = { LEDColours[LED0Num], LEDColours[LED1Num], LEDColours[LED2Num] };
-      Debug.LogFormat("[LEDS BTBE #{0}] Generated LED Colours: {1}, {2}, {3}.", ModuleId, LEDChosenColours[0], LEDChosenColours[1], LEDChosenColours[2]);
+      Debug.LogFormat("[RGB Mixing #{0}] Generated LED Colours: {1}, {2}, {3}.", ModuleId, LEDChosenColours[0], LEDChosenColours[1], LEDChosenColours[2]);
 
       LEDS[0].material = LEDMaterials[LED0Num];
       LEDS[1].material = LEDMaterials[LED1Num];
@@ -111,12 +111,12 @@ public class RGBLedsBTBE : MonoBehaviour {
       // If all three LEDs have green values of 1, use the first LED.
       if (LEDSRGB[0][1] == 1 && LEDSRGB[1][1] == 1 && LEDSRGB[2][1] == 1) {
          CorrectLED = 0;
-         Debug.LogFormat("[LEDS BTBE #{0}] Rule 1 Applies. Correct LED is #{1}.", ModuleId, CorrectLED+1);
+         Debug.LogFormat("[RGB Mixing #{0}] Rule 1 Applies. Correct LED is #{1}.", ModuleId, CorrectLED+1);
       }
       // Otherwise, if all three LEDs have red values of 0, use the third LED.
       else if (LEDSRGB[0][0] == 0 && LEDSRGB[1][0] == 0 && LEDSRGB[2][0] == 0) {
          CorrectLED = 2;
-         Debug.LogFormat("[LEDS BTBE #{0}] Rule 2 Applies. Correct LED is #{1}.", ModuleId, CorrectLED+1);
+         Debug.LogFormat("[RGB Mixing #{0}] Rule 2 Applies. Correct LED is #{1}.", ModuleId, CorrectLED+1);
       }
       // Otherwise, if there is only one LED that has a blue value of 1, use the LED with the blue value of 1.
       else if (LEDSRGB[0][2] + LEDSRGB[1][2] + LEDSRGB[2][2] == 1) {
@@ -125,7 +125,7 @@ public class RGBLedsBTBE : MonoBehaviour {
                CorrectLED = i;
             }
          }
-         Debug.LogFormat("[LEDS BTBE #{0}] Rule 3 Applies. Correct LED is #{1}.", ModuleId, CorrectLED+1);
+         Debug.LogFormat("[RGB Mixing #{0}] Rule 3 Applies. Correct LED is #{1}.", ModuleId, CorrectLED+1);
       }
       // Otherwise, if there is only one LED that has a green value of 0, use the LED with the green value of 0.
       else if (LEDSRGB[0][1] + LEDSRGB[1][1] + LEDSRGB[2][1] == 2) {
@@ -134,12 +134,12 @@ public class RGBLedsBTBE : MonoBehaviour {
                CorrectLED = i;
             }
          }
-         Debug.LogFormat("[LEDS BTBE #{0}] Rule 4 Applies. Correct LED is #{1}.", ModuleId, CorrectLED+1);
+         Debug.LogFormat("[RGB Mixing #{0}] Rule 4 Applies. Correct LED is #{1}.", ModuleId, CorrectLED+1);
       }
       // Otherwise, use the second LED.
       else {
          CorrectLED = 1; // Using the second LED
-         Debug.LogFormat("[LEDS BTBE #{0}] Otherwise condition Applies. Correct LED is #{1}.", ModuleId, CorrectLED+1);
+         Debug.LogFormat("[RGB Mixing #{0}] Otherwise condition Applies. Correct LED is #{1}.", ModuleId, CorrectLED+1);
       }
 
       // Start of Step 2 in Manual
@@ -173,7 +173,7 @@ public class RGBLedsBTBE : MonoBehaviour {
             break;
       }
 
-      Debug.LogFormat("[LEDS BTBE #{0}] The correct colour is {1}. Making the correct frequency {2}.", ModuleId, CorrectColour, CorrectFrequency);
+      Debug.LogFormat("[RGB Mixing #{0}] The correct colour is {1}. Making the correct frequency {2}.", ModuleId, CorrectColour, CorrectFrequency);
 
    }
 
@@ -215,7 +215,7 @@ public class RGBLedsBTBE : MonoBehaviour {
          // Solve
          GetComponent<KMBombModule>().HandlePass();
          ModuleSolved = true;
-         Debug.LogFormat("[LEDS BTBE #{0}] You submitted {1}. That is correct!", ModuleId, Frequencies[CurrentSelection]);
+         Debug.LogFormat("[RGB Mixing #{0}] You submitted {1}. That is correct!", ModuleId, Frequencies[CurrentSelection]);
          Audio.PlaySoundAtTransform(SolveSound, SubmitButton.transform);
          // Set colour to black for souvenir support?
          // Souv would have to ask about an LED that wasn't the solution since the freq display won't change (it'll prob look bad)
@@ -225,7 +225,7 @@ public class RGBLedsBTBE : MonoBehaviour {
       } else {
          // Strike
          GetComponent<KMBombModule>().HandleStrike();
-         Debug.LogFormat("[LEDS BTBE #{0}] You submitted {1}. But I was expecting {2}", ModuleId, Frequencies[CurrentSelection], CorrectFrequency);
+         Debug.LogFormat("[RGB Mixing #{0}] You submitted {1}. But I was expecting {2}", ModuleId, Frequencies[CurrentSelection], CorrectFrequency);
       }
    }
 
